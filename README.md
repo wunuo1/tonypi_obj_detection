@@ -1,64 +1,61 @@
 # tonypi_obj_detection
-# 功能介绍
+# Function Introduction
 
-基于深度学习的方法识别小球和底座，使用模型为YOLOv5s
+This package identifies balls and pedestals using a deep learning method with the YOLOv5s model.
 
-# 使用方法
+# Usage
 
-## 准备工作
+## Preparations
 
-1. 具备TonyPi机器人，包含相机及RDK套件，并且能够正常运行。
-2. 具备小球等相关道具
+1. Have a TonyPi robot, including a camera and RDK suite, and ensure it runs normally.
+2. Prepare relevant props such as small balls.
 
-## 安装功能包
+## Install the Package
 
-**1.安装功能包**
+**1. Install the package**
 
-启动机器人后，通过终端SSH或者VNC连接机器人，点击本页面右上方的“一键部署”按钮，复制如下命令在RDK的系统上运行，完成相关Node的安装。
+After starting the robot, connect to the robot through terminal SSH or VNC, click the "One-click Deployment" button at the top right of this page, copy the following command to run on the RDK system to complete the installation of the relevant Node.
 
 ```bash
 sudo apt update
 sudo apt install -y tros-tonypi-obj-detection
 ```
-
-**2.运行物体检测功能**
+**2. Run the Task Decomposition Function**
 
 ```shell
 source /opt/tros/local_setup.bash
-cp -r /opt/tros/lib/tonypi_obj_detection/config/ .
 
-# web端可视化障碍物（启动功能后在浏览器打开 ip:8000）
+# Visualize the guide line midpoint on the web (after starting the function, open ip:8000 in the browser)
 export WEB_SHOW=TRUE
 
 ros2 launch tonypi_obj_detection target_detection.launch.py
-
 ```
 
-# 原理简介
+# Principle Overview
+The RDK X3 obtains environmental data in front of the robot through the camera. Image data is inferred using a trained YOLO model to get the image coordinates of objects and publishes them.
 
-RDK X3通过摄像头获取机器人前方环境数据，图像数据通过训练好的YOLO模型进行推理得到物体的图像坐标值并发布。
+# Interface Description
 
-# 接口说明
+## Topics
 
-## 话题
+### Published Topics
 
-### Pub话题
+|Name  | Type                                  |  Description           |
+|------| --------------------------------------| --------------------------------|
+|/robot_target_detection |ai_msgs::msg::PerceptionTargets | Publishes information about obstacles|
 
-| 名称                          | 消息类型                                                     | 说明                                                   |
-| ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------ |
-| /robot_target_detection    | ai_msgs/msg/PerceptionTargets             | 发布障碍物信息                |
+### Subscribed Topics
 
-### Sub话题
-| 名称                          | 消息类型                                                     | 说明                                                   |
-| ----------------------------- | ------------------------------------------------------------ | ------------------------------------------------------ |
-| /hb_image       | hbm_img_msgs/msg/HbmMsg1080P      | 接收相机发布的图片消息（640x480）                   |
+|Name  | Type                                  |  Description           |
+|------| --------------------------------------| --------------------------------|
+|/hb_image |hbm_img_msgs/msg/HbmMsg1080P| Image message published by the image correction node (640x480)|
 
-## 参数
 
-| 参数名                | 类型        | 说明                                                                                                                                 |
-| --------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| sub_img_topic       | string |     接收的图片话题名称，请根据实际接收到的话题名称配置，默认值为/hb_image |
-| config_file | string | 配置文件读取路径，请根据识别情况配置，默认值为config/TonyPi_yolov5sconfig.json |
+## Parameters
+| Parameter Name             | Type       | Description  |
+| --------------------- | ----------- | ----------------------------------------------------- |
+| sub_img_topic	|string	|The name of the subscribed image topic. Configure according to the actual received topic name. Default value is /hb_image |
+| config_file	|string	|Path to the configuration file. Configure according to the recognition situation. Default value is config/TonyPi_yolov5sconfig.json |
 
-# 注意
-该功能包提供特定的实际场景中识别物体的模型，若自行采集数据集进行训练，请注意替换。
+# Note
+This package provides a model for recognizing objects in specific real-world scenarios. If you collect your own dataset for training, please replace the model accordingly.
