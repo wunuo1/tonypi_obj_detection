@@ -17,12 +17,6 @@ This package identifies balls and pedestals using a deep learning method with th
 After starting the robot, connect to it via SSH or VNC on the terminal, open the terminal, pull the corresponding code, and compile and install it.
 
 ```bash
-# Pull and install the robot SDK
-mkdir -p /home/pi && cd /home/pi
-git clone https://github.com/wunuo1/TonyPi.git -b feature-humble-x5
-cd /home/pi/TonyPi/HiwonderSDK
-pip install .
-
 # Pull the object detection code and compile it
 mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
 git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-humble-x5

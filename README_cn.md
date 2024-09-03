@@ -16,12 +16,6 @@
 启动机器人后，通过终端SSH或者VNC连接机器人，打开终端拉取相应代码并编译安装
 
 ```bash
-# 拉取人形机器人SDK并安装
-mkdir -p /home/pi && cd /home/pi
-git clone https://github.com/wunuo1/TonyPi.git -b feature-humble-x5
-cd /home/pi/TonyPi/HiwonderSDK
-pip install .
-
 # 拉取目标检测代码并编译
 mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
 git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-humble-x5
