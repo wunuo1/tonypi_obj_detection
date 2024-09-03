@@ -17,12 +17,15 @@ This package identifies balls and pedestals using a deep learning method with th
 After starting the robot, connect to it via SSH or VNC on the terminal, open the terminal, pull the corresponding code, and compile and install it.
 
 ```bash
-# Pull the object detection code and compile it
+# Pull the object detection code and image correction.
 mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
 git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-humble-x5
+git clone https://github.com/wunuo1/tonypi_image_correction.git -b feature-humble-x5
+
+# Compile
 cd ..
 source /opt/tros/setup.bash
-colcon build --packages-select tonypi_obj_detection
+colcon build
 ```
 
 **2. Run the Task Decomposition Function**

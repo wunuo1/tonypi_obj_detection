@@ -16,12 +16,15 @@
 启动机器人后，通过终端SSH或者VNC连接机器人，打开终端拉取相应代码并编译安装
 
 ```bash
-# 拉取目标检测代码并编译
+# 拉取目标检测代码与图像矫正代码
 mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
 git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-humble-x5
+git clone https://github.com/wunuo1/tonypi_image_correction.git -b feature-humble-x5
+
+# 编译
 cd ..
 source /opt/tros/setup.bash
-colcon build --packages-select tonypi_obj_detection
+colcon build
 ```
 
 **2.运行物体检测功能**
