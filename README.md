@@ -10,16 +10,21 @@ This package identifies balls and pedestals using a deep learning method with th
 1. Have a TonyPi robot, including a camera and RDK suite, and ensure it runs normally.
 2. Prepare relevant props such as small balls.
 
-## Install the Package
+## Compile and Run
 
-**1. Install the package**
+**1. Compile**
 
-After starting the robot, connect to the robot through terminal SSH or VNC, click the "One-click Deployment" button at the top right of this page, copy the following command to run on the RDK system to complete the installation of the relevant Node.
+After starting the robot, connect to it via SSH or VNC on the terminal, open the terminal, pull the corresponding code, and compile and install it.
 
 ```bash
-sudo apt update
-sudo apt install -y tros-tonypi-obj-detection
+# Pull the object detection code and compile it
+mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
+git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-foxy-x3
+cd ..
+source /opt/tros/setup.bash
+colcon build --packages-select tonypi_obj_detection
 ```
+
 **2. Run the Task Decomposition Function**
 
 ```shell
@@ -30,6 +35,7 @@ export WEB_SHOW=TRUE
 
 ros2 launch tonypi_obj_detection target_detection.launch.py
 ```
+
 
 # Principle Overview
 The RDK X3 obtains environmental data in front of the robot through the camera. Image data is inferred using a trained YOLO model to get the image coordinates of objects and publishes them.
