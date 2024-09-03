@@ -9,22 +9,32 @@
 1. 具备TonyPi机器人，包含相机及RDK套件，并且能够正常运行。
 2. 具备小球等相关道具
 
-## 安装功能包
+## 编译与运行
 
-**1.安装功能包**
+**1.编译**
 
-启动机器人后，通过终端SSH或者VNC连接机器人，点击本页面右上方的“一键部署”按钮，复制如下命令在RDK的系统上运行，完成相关Node的安装。
+启动机器人后，通过终端SSH或者VNC连接机器人，打开终端拉取相应代码并编译安装
 
 ```bash
-sudo apt update
-sudo apt install -y tros-tonypi-obj-detection
+# 拉取人形机器人SDK并安装
+mkdir -p /home/pi && cd /home/pi
+git clone https://github.com/wunuo1/TonyPi.git -b feature-humble-x5
+cd /home/pi/TonyPi/HiwonderSDK
+pip install .
+
+# 拉取目标检测代码并编译
+mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
+git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-humble-x5
+cd ..
+source /opt/tros/setup.bash
+colcon build --packages-select tonypi_obj_detection
 ```
 
 **2.运行物体检测功能**
 
 ```shell
-source /opt/tros/local_setup.bash
-cp -r /opt/tros/lib/tonypi_obj_detection/config/ .
+source ~/tonypi_ws/install/setup.bash
+cp -r ~/tonypi_ws/install/tonypi_obj_detection/lib/tonypi_obj_detection/config/ .
 
 # web端可视化障碍物（启动功能后在浏览器打开 ip:8000）
 export WEB_SHOW=TRUE

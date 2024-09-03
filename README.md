@@ -10,16 +10,27 @@ This package identifies balls and pedestals using a deep learning method with th
 1. Have a TonyPi robot, including a camera and RDK suite, and ensure it runs normally.
 2. Prepare relevant props such as small balls.
 
-## Install the Package
+## Compile and Run
 
-**1. Install the package**
+**1. Compile**
 
-After starting the robot, connect to the robot through terminal SSH or VNC, click the "One-click Deployment" button at the top right of this page, copy the following command to run on the RDK system to complete the installation of the relevant Node.
+After starting the robot, connect to it via SSH or VNC on the terminal, open the terminal, pull the corresponding code, and compile and install it.
 
 ```bash
-sudo apt update
-sudo apt install -y tros-tonypi-obj-detection
+# Pull and install the robot SDK
+mkdir -p /home/pi && cd /home/pi
+git clone https://github.com/wunuo1/TonyPi.git -b feature-humble-x5
+cd /home/pi/TonyPi/HiwonderSDK
+pip install .
+
+# Pull the object detection code and compile it
+mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
+git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-humble-x5
+cd ..
+source /opt/tros/setup.bash
+colcon build --packages-select tonypi_obj_detection
 ```
+
 **2. Run the Task Decomposition Function**
 
 ```shell
