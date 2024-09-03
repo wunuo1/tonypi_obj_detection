@@ -35,7 +35,7 @@ colcon build
 **2.运行物体检测功能**
 
 ```shell
-source /opt/tros/local_setup.bash
+source ~/tonypi_ws/install/setup.bash
 cp -r /opt/tros/lib/tonypi_obj_detection/config/ .
 
 # web端可视化障碍物（启动功能后在浏览器打开 ip:8000）

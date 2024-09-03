@@ -36,7 +36,8 @@ colcon build
 **2. Run the Task Decomposition Function**
 
 ```shell
-source /opt/tros/local_setup.bash
+source ~/tonypi_ws/install/setup.bash
+cp -r /opt/tros/lib/tonypi_obj_detection/config/ .
 
 # Visualize the guide line midpoint on the web (after starting the function, open ip:8000 in the browser)
 export WEB_SHOW=TRUE
