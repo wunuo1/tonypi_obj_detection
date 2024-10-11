@@ -37,7 +37,7 @@ colcon build
 
 ```shell
 source ~/tonypi_ws/install/setup.bash
-cp -r /opt/tros/lib/tonypi_obj_detection/config/ .
+cp -r ~/tonypi_ws/install/tonypi_obj_detection/lib/tonypi_obj_detection/config/ .
 
 # Visualize the guide line midpoint on the web (after starting the function, open ip:8000 in the browser)
 export WEB_SHOW=TRUE
