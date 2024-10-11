@@ -171,8 +171,14 @@ class TargetDetectionNode : public hobot::dnn_node::DnnNode {
   int model_input_height_ = -1;
 
   // 图片消息订阅者
-  rclcpp::SubscriptionHbmem<hbm_img_msgs::msg::HbmMsg1080P>::ConstSharedPtr
+#ifdef UBUTNU_22
+    rclcpp::Subscription<hbm_img_msgs::msg::HbmMsg1080P>::ConstSharedPtr
       hbm_img_subscription_ = nullptr;
+#else
+    rclcpp::SubscriptionHbmem<hbm_img_msgs::msg::HbmMsg1080P>::ConstSharedPtr
+      hbm_img_subscription_ = nullptr;
+#endif
+
   // 算法推理结果消息发布者
   rclcpp::Publisher<ai_msgs::msg::PerceptionTargets>::SharedPtr msg_publisher_ =
       nullptr;
@@ -210,12 +216,19 @@ TargetDetectionNode::TargetDetectionNode(const std::string& node_name,
   }
   LoadConfig(config_file_,yolo5_config_);
   // 创建消息订阅者，从摄像头节点订阅图像消息
-
+#ifdef UBUTNU_22
+  hbm_img_subscription_ =
+      this->create_subscription<hbm_img_msgs::msg::HbmMsg1080P>(
+          sub_img_topic_,
+          1,
+          std::bind(&TargetDetectionNode::FeedHbmImg, this, std::placeholders::_1));
+#else
   hbm_img_subscription_ =
       this->create_subscription_hbmem<hbm_img_msgs::msg::HbmMsg1080P>(
           sub_img_topic_,
           1,
           std::bind(&TargetDetectionNode::FeedHbmImg, this, std::placeholders::_1));
+#endif
 
   // 创建消息发布者，发布算法推理消息
   msg_publisher_ = this->create_publisher<ai_msgs::msg::PerceptionTargets>(

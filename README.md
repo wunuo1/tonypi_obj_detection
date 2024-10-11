@@ -19,16 +19,18 @@ After starting the robot, connect to it via SSH or VNC on the terminal, open the
 ```bash
 # Pull the object detection code and compile it
 mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
-git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-foxy-x3
+git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-x3
+git clone https://github.com/wunuo1/tonypi_image_correction.git
 cd ..
 source /opt/tros/setup.bash
-colcon build --packages-select tonypi_obj_detection
+colcon build
 ```
 
 **2. Run the Task Decomposition Function**
 
 ```shell
-source /opt/tros/local_setup.bash
+source ~/tonypi_ws/install/setup.bash
+cp -r ~/tonypi_ws/install/tonypi_obj_detection/lib/tonypi_obj_detection/config/ .
 
 # Visualize the guide line midpoint on the web (after starting the function, open ip:8000 in the browser)
 export WEB_SHOW=TRUE

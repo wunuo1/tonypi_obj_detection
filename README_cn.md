@@ -18,10 +18,11 @@
 ```bash
 # 拉取目标检测代码并编译
 mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
-git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-foxy-x3
+git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-x3
+git clone https://github.com/wunuo1/tonypi_image_correction.git
 cd ..
 source /opt/tros/setup.bash
-colcon build --packages-select tonypi_obj_detection
+colcon build
 ```
 
 **2.运行物体检测功能**
