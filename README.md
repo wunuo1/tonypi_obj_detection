@@ -21,11 +21,11 @@ After starting the robot, connect to it via SSH or VNC on the terminal, open the
 mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
 
 # RDK X5
-git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-humble-x5
-git clone https://github.com/wunuo1/tonypi_image_correction.git -b feature-humble-x5
+git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-x5
 # RDK X3
-git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-foxy-x3
-git clone https://github.com/wunuo1/tonypi_image_correction.git -b feature-foxy-x3
+git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-x3
+
+git clone https://github.com/wunuo1/tonypi_image_correction.git
 
 # Compile
 cd ..
@@ -37,7 +37,7 @@ colcon build
 
 ```shell
 source ~/tonypi_ws/install/setup.bash
-cp -r /opt/tros/lib/tonypi_obj_detection/config/ .
+cp -r ~/tonypi_ws/install/tonypi_obj_detection/lib/tonypi_obj_detection/config/ .
 
 # Visualize the guide line midpoint on the web (after starting the function, open ip:8000 in the browser)
 export WEB_SHOW=TRUE
