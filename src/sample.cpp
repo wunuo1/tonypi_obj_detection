@@ -26,7 +26,7 @@
 
 #include "robot_target_detection/parser.h"
 #include "robot_target_detection/image_utils.h"
-
+#include <fstream>
 
 // 使用hobotcv resize nv12格式图片，固定图片宽高比
 
@@ -264,7 +264,12 @@ int TargetDetectionNode::SetNodePara() {
   dnn_node_para_ptr_->model_task_type =
       hobot::dnn_node::ModelTaskType::ModelInferType;
   dnn_node_para_ptr_->task_num = 1;
+#ifdef UBUTNU_22
+  dnn_node_para_ptr_->bpu_core_ids.push_back(HB_BPU_CORE_0);
+#else
   dnn_node_para_ptr_->bpu_core_ids.push_back(hobot::dnn_node::BPUCoreIDType::BPU_CORE_0);
+#endif
+
   return 0;
 }
 
