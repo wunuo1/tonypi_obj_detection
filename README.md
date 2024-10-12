@@ -19,8 +19,8 @@ After starting the robot, connect to it via SSH or VNC on the terminal, open the
 ```bash
 # Pull the object detection code and image correction.
 mkdir -p ~/tonypi_ws/src && cd ~/tonypi_ws/src
-git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-humble-x5
-git clone https://github.com/wunuo1/tonypi_image_correction.git -b feature-humble-x5
+git clone https://github.com/wunuo1/tonypi_obj_detection.git -b feature-x5
+git clone https://github.com/wunuo1/tonypi_image_correction.git
 
 # Compile
 cd ..
