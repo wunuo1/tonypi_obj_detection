@@ -29,7 +29,12 @@ git clone https://github.com/wunuo1/tonypi_image_correction.git
 
 # Compile
 cd ..
+
+# RDK X5 
+source /opt/tros/humble/setup.bash
+# RDK X3
 source /opt/tros/setup.bash
+
 colcon build
 ```
 
