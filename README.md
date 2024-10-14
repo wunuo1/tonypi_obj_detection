@@ -33,7 +33,7 @@ source /opt/tros/setup.bash
 colcon build
 ```
 
-**2. Run the Task Decomposition Function**
+**2. Run object detection function**
 
 ```shell
 source ~/tonypi_ws/install/setup.bash
